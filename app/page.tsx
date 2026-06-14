@@ -4,7 +4,7 @@ import { Suspense } from 'react'
 import { Shield, Award, Leaf, ArrowRight, CheckCircle, Search } from 'lucide-react'
 import SearchBar from '@/components/SearchBar'
 import ListingCard from '@/components/ListingCard'
-import { getFeaturedListings, getStateCounts } from '@/lib/data'
+import { getFeaturedListings, getStateCounts, getTotalCount } from '@/lib/data'
 
 export const metadata: Metadata = {
   title: 'HolisticDentalFinder — Find a Dentist Who Actually Gets It',
@@ -28,9 +28,10 @@ const STATE_NAMES: Record<string, string> = {
 }
 
 export default async function HomePage() {
-  const [featuredListings, stateCounts] = await Promise.all([
+  const [featuredListings, stateCounts, totalCount] = await Promise.all([
     getFeaturedListings(6),
     getStateCounts(),
+    getTotalCount(),
   ])
 
   return (
@@ -60,11 +61,11 @@ export default async function HomePage() {
           <div className="flex flex-wrap items-center justify-center gap-6 mt-8 text-sm text-white/60">
             <span className="flex items-center gap-1.5">
               <CheckCircle className="w-4 h-4 text-gold" aria-hidden="true" />
-              Mercury-safe dentists
+              {totalCount.toLocaleString()}+ dentists listed
             </span>
             <span className="flex items-center gap-1.5">
               <CheckCircle className="w-4 h-4 text-gold" aria-hidden="true" />
-              SMART certified
+              Mercury-safe & SMART certified
             </span>
             <span className="flex items-center gap-1.5">
               <CheckCircle className="w-4 h-4 text-gold" aria-hidden="true" />
