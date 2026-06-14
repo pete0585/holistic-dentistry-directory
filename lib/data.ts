@@ -159,6 +159,16 @@ export async function getCityCount(city: string, state: string): Promise<number>
   return count ?? 0
 }
 
+export async function getTotalCount(): Promise<number> {
+  const supabase = createStaticClient()
+  const { count } = await supabase
+    .from('holistic_dentist_listings')
+    .select('*', { count: 'exact', head: true })
+    .eq('is_active', true)
+    .eq('is_approved', true)
+  return count ?? 0
+}
+
 export async function getAdminListings(): Promise<Listing[]> {
   const supabase = await createClient()
   const { data } = await supabase
