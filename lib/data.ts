@@ -130,36 +130,7 @@ export async function getAllSlugs(): Promise<string[]> {
   return (data ?? []).map((d: { slug: string }) => d.slug)
 }
 
-export async function getListingsByCity(city: string, state: string, limit = 24): Promise<Listing[]> {
-  const supabase = await createClient()
-  const { data } = await supabase
-    .from('holistic_dentist_listings')
-    .select('*')
-    .eq('is_active', true)
-    .eq('is_approved', true)
-    .ilike('city', city)
-    .eq('state', state.toUpperCase())
-    .order('listing_tier', { ascending: false })
-    .order('full_name', { ascending: true })
-    .limit(limit)
-
-  return (data as Listing[]) ?? []
-}
-
-export async function getCityCount(city: string, state: string): Promise<number> {
-  const supabase = createStaticClient()
-  const { count } = await supabase
-    .from('holistic_dentist_listings')
-    .select('*', { count: 'exact', head: true })
-    .eq('is_active', true)
-    .eq('is_approved', true)
-    .ilike('city', city)
-    .eq('state', state.toUpperCase())
-
-  return count ?? 0
-}
-
-export async function getTotalCount(): Promise<number> {
+export async function getTotalListingCount(): Promise<number> {
   const supabase = createStaticClient()
   const { count } = await supabase
     .from('holistic_dentist_listings')
