@@ -3,6 +3,7 @@
 import { useState, useEffect, use } from 'react'
 import Link from 'next/link'
 import { CheckCircle, AlertCircle, Shield, Award } from 'lucide-react'
+import { createClient } from '@supabase/supabase-js'
 
 interface PageProps {
   params: Promise<{ id: string }>
@@ -17,6 +18,16 @@ export default function ClaimPage({ params, searchParams }: PageProps) {
   const [email, setEmail] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
   const [upgrading, setUpgrading] = useState(false)
+  const [monthlyViews, setMonthlyViews] = useState(0)
+
+  useEffect(() => {
+    const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString()
+    createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
+      .from('listing_views').select('*', { count: 'exact', head: true })
+      .eq('directory_slug', 'holistic-dentistry').eq('listing_id', id)
+      .gte('viewed_at', monthStart)
+      .then(({ count }) => setMonthlyViews(count ?? 0))
+  }, [id])
 
   useEffect(() => {
     if (verifiedParam === 'true') {
@@ -103,6 +114,19 @@ export default function ClaimPage({ params, searchParams }: PageProps) {
           </p>
         </div>
 
+        <div className='text-center mb-6'>
+          <div className='text-5xl font-bold text-gray-900'>{monthlyViews ?? 0}</div>
+          <div className='text-gray-500 mt-1'>people viewed your profile this month</div>
+          <div className='mt-3 text-red-600 font-semibold'>0 could contact you — your phone and website are hidden</div>
+        </div>
+        <div className='space-y-3 mb-6 text-left'>
+          {[['Your phone number visible to searchers','They can call you directly'],['Your website linked','Drive traffic to your practice site'],['Your full bio displayed','Build trust before they reach out'],['Verified badge','Stand out from unclaimed profiles']].map(([title, sub]) => (
+            <div key={title} className='flex items-start gap-3'>
+              <span className='text-green-500 text-lg'>✓</span>
+              <div><div className='font-medium'>{title}</div><div className='text-sm text-gray-500'>{sub}</div></div>
+            </div>
+          ))}
+        </div>
         <h2 className="text-xl font-bold text-forest text-center mb-6">Upgrade your listing</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div className="bg-white rounded-2xl border border-forest/30 shadow-sm p-6">
