@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import ListingDetail from '@/components/ListingDetail'
 import { getListingBySlug, getAllSlugs } from '@/lib/data'
+import { createClient } from '@/lib/supabase/server'
+import { ViewTracker } from '@/components/ViewTracker'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -41,6 +43,13 @@ export default async function ListingPage({ params }: PageProps) {
   const listing = await getListingBySlug(slug)
   if (!listing) notFound()
 
+  const isClaimed = listing.listing_tier !== 'unclaimed' && listing.listing_tier != null
+  const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString()
+  const supabase = await createClient()
+  const { count: viewCount } = await supabase.from('listing_views').select('*', { count: 'exact', head: true })
+    .eq('directory_slug', 'holistic-dentistry').eq('listing_id', String(listing.id)).gte('viewed_at', monthStart)
+  const monthlyViews = viewCount ?? 0
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': ['Dentist', 'LocalBusiness', 'MedicalBusiness'],
@@ -70,7 +79,8 @@ export default async function ListingPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <ListingDetail listing={listing} />
+      <ListingDetail listing={listing} monthlyViews={monthlyViews} isClaimed={isClaimed} />
+      <ViewTracker listingId={String(listing.id)} directorySlug='holistic-dentistry' />
     </>
   )
 }

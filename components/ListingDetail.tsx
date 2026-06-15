@@ -9,9 +9,12 @@ import { CREDENTIAL_LABELS, SPECIALTY_LABELS, formatPhone } from '@/lib/utils'
 
 interface ListingDetailProps {
   listing: Listing
+  monthlyViews?: number
+  isClaimed?: boolean
 }
 
-export default function ListingDetail({ listing }: ListingDetailProps) {
+export default function ListingDetail({ listing, monthlyViews = 0, isClaimed: isClaimedProp }: ListingDetailProps) {
+  const isClaimed = isClaimedProp ?? (listing.listing_tier !== 'unclaimed' && listing.listing_tier != null)
   const [leadSent, setLeadSent] = useState(false)
   const [leadLoading, setLeadLoading] = useState(false)
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', notes: '' })
@@ -89,13 +92,13 @@ export default function ListingDetail({ listing }: ListingDetailProps) {
                 </div>
 
                 <div className="flex flex-wrap gap-3 mt-3">
-                  {listing.phone && (
+                  {isClaimed && listing.phone && (
                     <a href={`tel:${listing.phone}`} className="flex items-center gap-1.5 text-forest hover:text-forest-light text-sm font-medium transition-colors">
                       <Phone className="w-4 h-4" aria-hidden="true" />
                       {formatPhone(listing.phone)}
                     </a>
                   )}
-                  {listing.website && (
+                  {isClaimed && listing.website && (
                     <a href={listing.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-forest hover:text-forest-light text-sm font-medium transition-colors">
                       <Globe className="w-4 h-4" aria-hidden="true" />
                       Visit Website
@@ -141,12 +144,19 @@ export default function ListingDetail({ listing }: ListingDetailProps) {
           </div>
 
           {/* Bio */}
-          {listing.bio && (
+          {isClaimed && listing.bio ? (
             <div className="bg-white rounded-2xl border border-ivory-dark shadow-sm p-6">
               <h2 className="font-bold text-forest text-lg mb-3">About</h2>
               <p className="text-gray-600 leading-relaxed whitespace-pre-wrap">{listing.bio}</p>
             </div>
-          )}
+          ) : !isClaimed ? (
+            <div className='rounded-lg border border-gray-200 bg-gray-50 p-4 text-center'>
+              <p className='text-sm text-gray-500'>Phone, website, and bio are only visible after this provider claims their listing.</p>
+              <a href={`/claim/${listing.id}`} className='mt-2 inline-block text-sm font-medium text-blue-600 hover:underline'>
+                Is this you? Claim your free profile →
+              </a>
+            </div>
+          ) : null}
 
           {/* Credentials */}
           {listing.credentials.length > 0 && (
@@ -318,6 +328,18 @@ export default function ListingDetail({ listing }: ListingDetailProps) {
               )}
             </dl>
           </div>
+
+          {/* Profile Activity Stats */}
+          {isClaimed && (
+            <div className='mb-6 rounded-xl border border-blue-200 bg-blue-50 p-4'>
+              <p className='text-xs font-semibold uppercase tracking-wide text-blue-600'>Profile Activity</p>
+              <p className='mt-1 text-3xl font-bold text-blue-900'>{monthlyViews}</p>
+              <p className='text-sm text-blue-700'>people viewed your profile this month</p>
+              {listing.listing_tier === 'free' && (
+                <p className='mt-2 text-xs text-blue-600'>0 could contact you. <a href={`/claim/${listing.id}?upgrade=true`} className='underline font-medium'>Upgrade to be reachable →</a></p>
+              )}
+            </div>
+          )}
 
           {/* Upgrade CTA */}
           {listing.listing_tier === 'free' && listing.claimed_at && (
