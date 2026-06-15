@@ -25,7 +25,7 @@ export interface Listing {
   biocompat_testing: boolean
   holistic_pediatric: boolean
   accepting_new_patients: boolean
-  listing_tier: 'free' | 'verified' | 'featured'
+  listing_tier: 'unclaimed' | 'free' | 'verified' | 'featured'
   is_active: boolean
   is_approved: boolean
   stripe_customer_id: string | null
