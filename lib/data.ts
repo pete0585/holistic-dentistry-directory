@@ -150,3 +150,18 @@ export async function getAdminListings(): Promise<Listing[]> {
 
   return (data as Listing[]) ?? []
 }
+export async function getListingsByCity(city: string, state: string, limit = 24): Promise<Listing[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('holistic_dentist_listings')
+    .select('*')
+    .eq('is_active', true)
+    .eq('is_approved', true)
+    .ilike('city', city)
+    .eq('state', state.toUpperCase())
+    .order('listing_tier', { ascending: false })
+    .order('full_name', { ascending: true })
+    .limit(limit)
+
+  return (data as Listing[]) ?? []
+}
