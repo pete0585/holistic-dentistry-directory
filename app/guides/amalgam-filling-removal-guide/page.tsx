@@ -34,11 +34,11 @@ const FAQ = [
   },
   {
     q: 'What should I do after amalgam removal?',
-    a: 'Many holistic dentists recommend a post-removal detox protocol to support the body's clearance of any mercury released during the procedure. Common recommendations include: chlorella (algae that binds heavy metals in the gut), vitamin C (antioxidant support), cilantro, and in some cases DMSA chelation under medical supervision for documented heavy metal toxicity. The evidence for specific detox protocols after SMART removal is limited — these are largely practitioner-experience-based recommendations rather than controlled trial outcomes. Work with your holistic dentist and/or integrative medicine provider on a plan appropriate for your situation.',
+    a: "Many holistic dentists recommend a post-removal detox protocol to support the body's clearance of any mercury released during the procedure. Common recommendations include: chlorella (algae that binds heavy metals in the gut), vitamin C (antioxidant support), cilantro, and in some cases DMSA chelation under medical supervision for documented heavy metal toxicity. The evidence for specific detox protocols after SMART removal is limited — these are largely practitioner-experience-based recommendations rather than controlled trial outcomes. Work with your holistic dentist and/or integrative medicine provider on a plan appropriate for your situation.",
   },
 ]
 
-SMART_STEPS = [
+const SMART_STEPS = [
   { step: '1', title: 'Rubber Dam Placement', detail: 'A non-latex rubber dam seals the tooth from the rest of the mouth, preventing amalgam particles and fragments from being swallowed.' },
   { step: '2', title: 'High-Volume Evacuation', detail: 'A large-diameter suction tip is placed directly at the tooth throughout the procedure to capture mercury vapor and particles immediately at the source.' },
   { step: '3', title: 'Sectioning — Not Grinding', detail: 'The filling is cut into chunks with a small carbide bur and lifted out in pieces, rather than ground down. Grinding vaporizes more mercury — sectioning minimizes it.' },

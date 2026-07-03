@@ -38,7 +38,7 @@ const FAQ = [
   },
 ]
 
-COST_ROWS = [
+const COST_ROWS = [
   { proc: 'Composite filling (1 surface)', conventional: '$150–$250', holistic: '$175–$350' },
   { proc: 'SMART amalgam removal', conventional: 'N/A (standard removal $150–$250)', holistic: '$200–$500 per filling' },
   { proc: 'Zirconia crown', conventional: 'PFM crown $1,200–$1,800', holistic: '$1,500–$2,500' },
