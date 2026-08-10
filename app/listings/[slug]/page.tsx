@@ -62,8 +62,8 @@ export default async function ListingPage({ params }: PageProps) {
       postalCode: listing.zip ?? undefined,
       streetAddress: listing.address_line1 ?? undefined,
     },
-    telephone: listing.phone ?? undefined,
-    url: listing.website ?? undefined,
+    telephone: isClaimed ? (listing.phone ?? undefined) : undefined,
+    url: isClaimed ? (listing.website ?? undefined) : undefined,
     ...(listing.latitude && listing.longitude ? {
       geo: {
         '@type': 'GeoCoordinates',
