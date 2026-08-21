@@ -11,12 +11,13 @@ const TIER_BADGE: Record<string, { label: string; className: string }> = {
   featured: { label: 'Featured', className: 'bg-gold text-forest-dark font-semibold' },
   verified: { label: 'Verified', className: 'bg-forest text-gold font-medium' },
   free: { label: '', className: '' },
+  unclaimed: { label: '', className: '' },
 }
 
 export default function ListingCard({ listing }: ListingCardProps) {
-  const tierBadge = TIER_BADGE[listing.listing_tier]
-  const topCredentials = listing.credentials.slice(0, 2)
-  const topSpecialties = listing.specialties.slice(0, 3)
+  const tierBadge = TIER_BADGE[listing.listing_tier] ?? { label: '', className: '' }
+  const topCredentials = (listing.credentials ?? []).slice(0, 2)
+  const topSpecialties = (listing.specialties ?? []).slice(0, 3)
 
   return (
     <Link href={`/listings/${listing.slug}`} className="block group">
