@@ -67,8 +67,8 @@ git push origin main
 
 ## Stripe Products
 
-- **Verified Listing:** $149/year (price_1TeDf4GzK9Siblue5qAyGc3t) — NOTE: Stripe products were created by bootstrap; verify prices match SPEC if needed
-- **Featured Listing:** $299/year (price_1TeDf4GzK9SibluecujKBbpx)
+- **Verified Listing:** $149/year (price_REPLACE_ME) — NOTE: Stripe products were created by bootstrap; verify prices match SPEC if needed
+- **Featured Listing:** $299/year (price_REPLACE_ME)
 
 Stripe webhook registered at: `https://www.holisticdentalfinder.com/api/webhooks/stripe`
 
