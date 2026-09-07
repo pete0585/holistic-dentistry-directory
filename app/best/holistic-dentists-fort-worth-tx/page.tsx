@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { cityPageCanonical } from "@/lib/city-pages"
 import { createClient } from "@/lib/supabase/server"
 
 export const metadata: Metadata = {
   title: "Best Holistic Dentist in Fort Worth, TX | Holistic Dentist Directory",
   description: "Find holistic dentist in Fort Worth, Texas. 32+ listed. Filter by city and compare providers.",
+  alternates: { canonical: cityPageCanonical("holistic-dentists-fort-worth-tx") },
 }
 
 async function getListings() {

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import ListingCard from '@/components/ListingCard'
+import { cityPageCanonical } from '@/lib/city-pages'
 import { getListingsByCity } from '@/lib/data'
 
 export const metadata: Metadata = {
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Best Holistic Dentists in Chicago, IL | HolisticDentalFinder',
     description: 'Find the best biological, holistic, and mercury-safe dentists in Chicago, IL. IAOMT and IABDM-verified practitioners in Lincoln Park, Wicker Park, and across the Chicagoland metro.',
   },
-  alternates: { canonical: 'https://holisticdentalfinder.com/best/holistic-dentists-chicago' },
+  alternates: { canonical: cityPageCanonical('holistic-dentists-chicago') },
 }
 
 const jsonLd = {

@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { cityPageCanonical } from "@/lib/city-pages"
 import { createClient } from "@/lib/supabase/server"
 
 export const metadata: Metadata = {
   title: "Best Holistic Dentist in Charlotte, NC | Holistic Dentist Directory",
   description: "Find holistic dentist in Charlotte, North Carolina. 25+ listed. Filter by city and compare providers.",
+  alternates: { canonical: cityPageCanonical("holistic-dentists-charlotte-nc") },
 }
 
 async function getListings() {
