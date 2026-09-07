@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import ListingCard from '@/components/ListingCard'
+import { cityPageCanonical } from '@/lib/city-pages'
 import { getListingsByCity } from '@/lib/data'
 
 export const metadata: Metadata = {
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Best Holistic Dentists in Austin, TX | HolisticDentalFinder',
     description: 'Verified biological and mercury-safe dentists in Austin, Texas.',
   },
-  alternates: { canonical: 'https://holisticdentalfinder.com/best/holistic-dentists-austin' },
+  alternates: { canonical: cityPageCanonical('holistic-dentists-austin') },
 }
 
 const jsonLd = {

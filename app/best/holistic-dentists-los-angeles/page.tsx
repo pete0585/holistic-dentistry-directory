@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import ListingCard from '@/components/ListingCard'
+import { cityPageCanonical } from '@/lib/city-pages'
 import { getListingsByCity } from '@/lib/data'
 
 export const metadata: Metadata = {
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
     title: 'Best Holistic Dentists in Los Angeles | HolisticDentalFinder',
     description: 'Verified biological and holistic dentists in Los Angeles. SMART certified, ozone therapy, ceramic implants.',
   },
+  alternates: { canonical: cityPageCanonical('holistic-dentists-los-angeles') },
 }
 
 const jsonLd = {

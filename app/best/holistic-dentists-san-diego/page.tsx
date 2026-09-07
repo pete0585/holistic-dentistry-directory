@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import ListingCard from '@/components/ListingCard'
+import { cityPageCanonical } from '@/lib/city-pages'
 import { getListingsByCity } from '@/lib/data'
 
 export const metadata: Metadata = {
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Best Holistic Dentists in San Diego, CA | HolisticDentalFinder',
     description: 'Find the best biological, holistic, and mercury-safe dentists in San Diego, CA. IAOMT and IABDM-verified practitioners in La Jolla, Encinitas, and across San Diego County.',
   },
-  alternates: { canonical: 'https://holisticdentalfinder.com/best/holistic-dentists-san-diego' },
+  alternates: { canonical: cityPageCanonical('holistic-dentists-san-diego') },
 }
 
 const jsonLd = {

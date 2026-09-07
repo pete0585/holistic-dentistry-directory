@@ -1,11 +1,13 @@
 import type { MetadataRoute } from 'next'
+import { getCityPageSlugs } from '@/lib/city-pages'
 import { getAllSlugs, getStateCounts } from '@/lib/data'
+import { getSiteUrl } from '@/lib/site'
 import { SPECIALTY_SLUGS } from '@/lib/utils'
 
 export const revalidate = 86400
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = 'https://holisticdentalfinder.com'
+  const base = getSiteUrl()
   const [slugs, stateCounts] = await Promise.all([getAllSlugs(), getStateCounts()])
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -35,5 +37,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
-  return [...staticPages, ...categoryPages, ...statePages, ...listingPages]
+  const cityPages: MetadataRoute.Sitemap = getCityPageSlugs().map((slug) => ({
+    url: `${base}/best/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }))
+
+  return [...staticPages, ...categoryPages, ...statePages, ...listingPages, ...cityPages]
 }

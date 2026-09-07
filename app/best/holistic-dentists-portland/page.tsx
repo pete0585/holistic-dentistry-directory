@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import ListingCard from '@/components/ListingCard'
+import { cityPageCanonical } from '@/lib/city-pages'
 import { getListingsByCity } from '@/lib/data'
 
 export const metadata: Metadata = {
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Best Holistic Dentists in Portland, OR | HolisticDentalFinder',
     description: 'Find the best biological, holistic, and mercury-safe dentists in Portland, OR. IAOMT and IABDM-verified practitioners in Southeast Portland, Lake Oswego, and across the greater Portland metro.',
   },
-  alternates: { canonical: 'https://holisticdentalfinder.com/best/holistic-dentists-portland' },
+  alternates: { canonical: cityPageCanonical('holistic-dentists-portland') },
 }
 
 const jsonLd = {

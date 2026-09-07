@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import ListingCard from '@/components/ListingCard'
+import { cityPageCanonical } from '@/lib/city-pages'
 import { getListingsByCity } from '@/lib/data'
 
 export const metadata: Metadata = {
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Best Holistic Dentists in Miami, FL | HolisticDentalFinder',
     description: 'Find the best biological, holistic, and mercury-safe dentists in Miami, FL. IAOMT and IABDM-verified practitioners in Brickell, Coral Gables, and South Florida.',
   },
-  alternates: { canonical: 'https://holisticdentalfinder.com/best/holistic-dentists-miami' },
+  alternates: { canonical: cityPageCanonical('holistic-dentists-miami') },
 }
 
 const jsonLd = {
