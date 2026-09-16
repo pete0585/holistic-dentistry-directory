@@ -1,3 +1,4 @@
+import {articles as editorialArticles} from '@/lib/editorial-blog'
 import type { MetadataRoute } from 'next'
 import { getCityPageSlugs } from '@/lib/city-pages'
 import { getAllSlugs, getStateCounts } from '@/lib/data'
@@ -6,7 +7,7 @@ import { SPECIALTY_SLUGS } from '@/lib/utils'
 
 export const revalidate = 86400
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+async function originalSitemap(): Promise<MetadataRoute.Sitemap> {
   const base = getSiteUrl()
   const [slugs, stateCounts] = await Promise.all([getAllSlugs(), getStateCounts()])
 
@@ -46,3 +47,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [...staticPages, ...categoryPages, ...statePages, ...listingPages, ...cityPages]
 }
+
+export default async function editorialSitemap():Promise<MetadataRoute.Sitemap>{const existing=await originalSitemap();const site="https://holisticdentalfinder.com";return [...existing,{url:site+'/blog',changeFrequency:'weekly'},...editorialArticles().map(p=>({url:site+'/blog/'+p.slug,lastModified:new Date(p.date),changeFrequency:'monthly' as const}))]}
