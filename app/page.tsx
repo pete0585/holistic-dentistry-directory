@@ -5,6 +5,7 @@ import { Shield, Award, Leaf, ArrowRight, CheckCircle, Search } from 'lucide-rea
 import SearchBar from '@/components/SearchBar'
 import ListingCard from '@/components/ListingCard'
 import { getFeaturedListings, getStateCounts, getTotalListingCount } from '@/lib/data'
+import NewsletterSignup from '@/components/NewsletterSignup'
 
 export const metadata: Metadata = {
   title: 'HolisticDentalFinder — Find a Dentist Who Actually Gets It',
