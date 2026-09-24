@@ -45,12 +45,21 @@ export default async function HomePage() {
             IAOMT · IABDM · HDA + Non-Affiliated Dentists
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-            Find a dentist who{' '}
-            <span className="text-gold">actually understands</span>{' '}
-            whole-body health
+            Find trusted holistic dentists near you
           </h1>
           <p className="text-white/80 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-            The only directory covering all IAOMT, IABDM, and HDA members plus non-affiliated biological and holistic dentists nationwide. Stop guessing — find a verified practitioner who shares your values.
+            Browse IAOMT-certified and holistic dentists by values and location — and connect directly. Free, always.
+          </p>
+          <p className="text-sm text-gray-500 mt-4">
+            Are you a holistic dentist?{' '}
+            <a
+              href="https://studiozerohq.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:opacity-80"
+            >
+              List your practice free →
+            </a>
           </p>
 
           <div className="bg-white/10 backdrop-blur rounded-2xl p-4 sm:p-6 max-w-3xl mx-auto">
