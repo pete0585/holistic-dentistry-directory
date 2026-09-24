@@ -112,8 +112,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   {[
                     ['Add Your Practice', '/submit'],
                     ['Claim Your Listing', '/listings'],
-                    ['Verified Listing — $149/yr', '/submit'],
-                    ['Featured Listing — $299/yr', '/submit'],
+
                   ].map(([label, href]) => (
                     <li key={label}><Link href={href} className="text-white/60 hover:text-gold transition-colors">{label}</Link></li>
                   ))}
