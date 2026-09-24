@@ -213,7 +213,7 @@ export default async function HomePage() {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-forest mb-3">Are you a holistic or biological dentist?</h2>
           <p className="text-gray-600 mb-8 leading-relaxed">
-            Your listing may already be here — claim it free to add your full profile. A single new patient is worth $2,000–$15,000. A Verified listing at $149/year is a 13–100x ROI.
+            Your listing may already be here — claim it free to add your full profile. A single new patient is worth $2,000–$15,000.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
