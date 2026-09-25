@@ -7,7 +7,7 @@ const NICHE = 'holistic-dentistry' as const
 const DIRECTORY_SLUG = 'holistic-dentistry-directory' as const
 const NEWSLETTER_NAME = 'The Dental Footnote' as const
 const CONFIRM_URL_BASE = 'https://www.holisticdentalfinder.com/newsletter/confirm'
-const DASHBOARD_URL = 'https://aidam.thestrategicveteran.com'
+const DASHBOARD_URL = 'https://aidam.studiozerohq.com'
 
 export async function POST(req: NextRequest) {
   let email: string, first_name: string | undefined
