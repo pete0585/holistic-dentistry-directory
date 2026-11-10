@@ -1,27 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { createServiceClient } from '@/lib/supabase/server'
+import { NextResponse } from 'next/server'
 
-export async function POST(req: NextRequest) {
-  let body: { listing_id: string; approved: boolean }
-
-  try {
-    body = await req.json()
-  } catch {
-    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
-  }
-
-  const { listing_id, approved } = body
-
-  if (!listing_id) {
-    return NextResponse.json({ error: 'Missing listing_id' }, { status: 400 })
-  }
-
-  const supabase = await createServiceClient()
-
-  await supabase
-    .from('holistic_dentist_listings')
-    .update({ is_approved: approved, updated_at: new Date().toISOString() })
-    .eq('id', listing_id)
-
-  return NextResponse.json({ success: true })
+// No trusted administrator mechanism is currently provisioned. Cookie presence
+// or client-supplied fields are never authority to mutate a directory listing.
+export async function POST() {
+  return NextResponse.json({ error: 'Administrator actions are unavailable until a validated administrator identity and role are configured.', code: 'administrator_access_not_configured' }, { status: 503, headers: { 'Cache-Control': 'no-store' } })
 }
