@@ -76,7 +76,7 @@ export default function ListingDetail({ listing, monthlyViews = 0, isClaimed: is
                       <Phone className="w-4 h-4" aria-hidden="true"/>
                       {formatPhone(listing.phone)}
                     </a>)}
-                  {listing.website && (<a href={listing.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-forest hover:text-forest-light text-sm font-medium transition-colors">
+                  {listing.website && (<a data-directory-action="website_click" href={listing.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-forest hover:text-forest-light text-sm font-medium transition-colors">
                       <Globe className="w-4 h-4" aria-hidden="true"/>
                       Visit Website
                     </a>)}
